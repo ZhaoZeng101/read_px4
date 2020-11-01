@@ -1,3 +1,16 @@
 FixedwingPositionControl::parameters_update(){
     updateParams();
 }
+_landingslope.uplate(radians(_param_fw_lnd_ang.get()), _param_fw_lnd_flalt.get(), land_thrust_lim_alt_relative, _param_fw_lnd_hvirt.get());
+landing_status_publish();
+if ((_param_fw_airspd_max.get() < _param_fw_airspd_min.get()) ||
+    (_param_fw_airspd_max.get() < 5.0f)   ||
+    (_param_fw_airspd_min.get() > 100.0f) ||
+    (_param_fw_airspd_trim.get() < _param_fw_airspd_min.get()) ||))
+
+    get_waypoint_heading_distance(){
+        position_setpoint_s temp_prev = waypoint_prev;
+        position_setpoint_s temp_next = waypoint_next;
+
+    }
+    reset altitude 
