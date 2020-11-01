@@ -1,0 +1,3 @@
+FixedwingPositionControl::parameters_update(){
+    updateParams();
+}
