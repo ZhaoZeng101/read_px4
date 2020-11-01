@@ -13,4 +13,5 @@ if ((_param_fw_airspd_max.get() < _param_fw_airspd_min.get()) ||
         position_setpoint_s temp_next = waypoint_next;
 
     }
-    reset altitude 
+    reset altitude
+    git push
