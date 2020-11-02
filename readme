@@ -14,4 +14,5 @@ if ((_param_fw_airspd_max.get() < _param_fw_airspd_min.get()) ||
 
     }
     reset altitude
-    git push
+    git pus:
+    github:
