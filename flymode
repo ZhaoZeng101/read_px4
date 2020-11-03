@@ -52,4 +52,28 @@ all params:
 RWTO_TKOFF: 
     带有起落架的跑道起飞.Default:disabled.
 RWTO_MAX_THR:
-    
+    跑道起飞时的最大油门.
+FW_CLMBOUT_DIFF:爬升差异。如果在没有起飞高度设定值的情况下起飞（在起飞模式下没有设定值，但在任务中有设定值），则将其用作目标高度。I
+FW_AIRSPD_MIN:
+    最小空速。TECS控制器
+最小空速，低于此值，TECS控制器将尝试更积极地提高空速。
+RWTO_AIRSPD_SCL:
+
+最小起飞的空速比例因子。当空速达到时,Pitch会增加：FW_AIRSPD_MIN * RWTO_AIRSPD_SCL
+RWTO_NAV_ALT:
+
+海拔高度（AGL），在该海拔高度我们有足够的地面间隙以允许一些滚动。在到达RWTO_NAV_ALT之前，飞机保持水平，仅使用舵保持航向（请参阅RWTO_HDG）。如果FW_CLMBOUT_DIFF> 0，则该值应低于FW_CLMBOUT_DIFF。
+
+RWTO_HDG :
+
+指定在跑道起飞期间应保持的航向
+
+注释：0：机体航向； 1：朝向起飞航点
+
+值：
+0：机身
+1：航点
+RWTO_RAMP_TIME:
+    跑道起飞的油门加速时间
+RWTO_PSP:
+    滑行期间/      达到起飞空速之前的俯仰设定点。车轮可摆式的尾桨可能需要稍微倾斜一点，才能在达到空速起飞之前将其车轮保持在地面上
