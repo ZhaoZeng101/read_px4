@@ -1,0 +1,55 @@
+land模式：
+    FW_LAND_ANG: flaring（大约是降落曲线的意思）前的land坡度角度
+
+takeoff mode：
+  PX4在任务中支持固定翼起飞并使用起飞飞行模式。车辆可以是弹射器/   手动发射器，也可以使用跑道起飞模式。在所有情况下，车辆都会沿其当前方向以预定义的间距起飞（忽略RC摇杆输入）。
+以下各节介绍了主要方法。
+
+position mode to takeoff the plane: 11111111111
+如果车辆在低于FW_CLMBOUT_DIFF的高度下启动时检测到足够的启动加速度，它将在“位置”模式下起飞
+params:
+   FW_CLAMBOUT_DIFF 
+require:
+    Arm the vehicle.
+    Put the vehicle into Position model.
+    使用发射或者抛飞的方式
+车辆将以与起飞模式相同的爬升行为上升到FW_CLMBOUT_DIFF。然后它将在位置模式下继续。
+
+Catapult/Hand Launch22222222222222
+在弹射器/手动发射模式下，车辆等待检测发射（基于加速触发）。发射时，它会在约2秒钟内升至全油门（RWTO_MAX_THR），然后以最小10度的起飞俯仰进行全油门爬升。一旦达到FW_CLMBOUT_DIFF，它将转换为Hold模式并游荡。
+
+Runway takeoff
+跑道起飞模式分为以下几个阶段：
+1 Throttle ramp:  
+油门坡道：固定在跑道上（固定俯仰，无侧倾和航向保持），直到达到起            飞的最小空速（FW_AIRSPD_MIN x RWTO_AIRSPD_SCL）
+2 Takeoff:
+    起飞：增加俯仰角并继续直到车辆高度>导航高度（RWTO_NAV_ALT）。
+3 Climbout:
+    爬升：爬升至海拔高度>       
+    FW_CLMBOUT_DIFF。在此阶段，将取消滚动和航向限制。
+
+
+Mission Takeoff
+    您也可以在任务中手抛/弹射发射固定翼飞机。
+    to launch in a mission:
+    1 add a fixed wing takeoff item to the start of the mission.
+       将起飞项目的最小俯仰参数设置为适合您的机身的值！
+    2 切换到任务模式
+    3 arm飞机
+    4 弹射或者直接抛飞
+
+大多数传统的固定翼车辆必须是平坦的并且在放行时保持水平（重要的是，机鼻不能向上或向下，并且该车辆不能滚动/偏航）。
+一些用户报告说，通过预触发起飞检测并在释放之前将其加速至全油门（触发起飞检测泵/使飞机向前摇动），起飞性能得到了改善。
+
+
+一旦检测到发射/飞行，车辆就会爬出（使用起飞航点中的最小俯仰参数）并导航到起飞航点的位置。它会继续爬升，直到达到起飞航点高度以下<FW_CLMBOUT_DIFF（如果在达到该高度之前到达目标航点，则会螺旋上升至该水平）。
+
+爬升过程中侧倾角最大为15度（FW_CLMBOUT_DIFF> 0，到起飞高度的距离> FW_CLMBOUT_DIFF）
+
+当任务到达高度（在FW_CLMBOUT_DIFF内）和位置时，它将转换到下一个航点。
+
+all params:
+RWTO_TKOFF: 
+    带有起落架的跑道起飞.Default:disabled.
+RWTO_MAX_THR:
+    
