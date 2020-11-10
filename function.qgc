@@ -1,0 +1,61 @@
+convertNedToGeo
+
+ if(i == 1){ // set takeoff point
+            item->setParam5(_vehicle->targetTakeoffPosition().latitude());
+            item->setParam6(_vehicle->targetTakeoffPosition().longitude());
+            tempAltitude = _vehicle->altitude_above_ground() * 0.9;
+            if(tempAltitude > 20){
+                item->setParam7(tempAltitude);
+                qDebug() << "takeoff->setParam7:" << tempAltitude;
+            }
+        }else if(i < missionItems.count() - 7) { //middle points
+            item->setParam5(_vehicle->targetMiddlePostion().latitude());
+            item->setParam6(_vehicle->targetMiddlePostion().longitude());
+            tempAltitude = _vehicle->altitude_above_ground() * 0.5;
+            if(tempAltitude > 0){
+                item->setParam7(tempAltitude);
+                qDebug() << "middle->setParam7:" << tempAltitude;
+            }
+        }else if (i == missionItems.count() - 7) { //set land point
+            if((MAV_CMD)item->command() != (MAV_CMD)missionItems[missionItems.count() - 1]->command()){
+                item->setCommand((MAV_CMD)missionItems[missionItems.count() - 1]->command());
+                item->setAutoContinue(missionItems[missionItems.count() - 1]->autoContinue());
+
+                item->setParam5(_vehicle->targetLandposiont().latitude());
+                item->setParam6(_vehicle->targetLandposiont().longitude());
+
+                tempAltitude = 0;
+                item->setParam7(tempAltitude);
+
+            }
+        }else if(i ==  missionItems.count() - 1){ //end point
+            item->setSequenceNumber(missionItems.count() - 1);
+        }
+
+
+
+
+         if(i == 1){ // set takeoff point
+            item->setParam5(_vehicle->targetTakeoffPosition().latitude());
+            item->setParam6(_vehicle->targetTakeoffPosition().longitude());
+            tempAltitude = _vehicle->targetTakeoffPosition().altitude() - _vehicle->homePosition().altitude();
+            if(tempAltitude > 20){
+                item->setParam7(tempAltitude);
+                qDebug() << "item->setParam7:" << tempAltitude;
+            }
+        }else if (i == missionItems.count() - 7) { //set land point
+            if((MAV_CMD)item->command() != (MAV_CMD)missionItems[missionItems.count() - 1]->command()){
+                item->setCommand((MAV_CMD)missionItems[missionItems.count() - 1]->command());
+                item->setAutoContinue(missionItems[missionItems.count() - 1]->autoContinue());
+                item->setParam5(_vehicle->targetTakeoffPosition().latitude());
+                item->setParam6(_vehicle->targetTakeoffPosition().longitude());
+                tempAltitude = 0;
+                item->setParam7(tempAltitude);
+                item->setSequenceNumber(missionItems.count() - 7);
+            }
+        }else if(i < missionItems.count() - 7) {
+
+        }else if(i ==  missionItems.count() - 1){
+            item->setSequenceNumber(missionItems.count() - 1);
+        }
+
