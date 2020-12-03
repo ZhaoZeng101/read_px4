@@ -1,0 +1,27 @@
+COM_DISARM_PRFLT        -1s
+FW_LND_ANG              20deg
+LAUN_ALL_ON             1
+LAUN_CAT_A              5m/s^2
+NAV_FW_ALT_RAD          50m
+NAV_FW_ALTLi_RAD        50m
+PLD_HACC_RAD            3m
+NAV_LOITER_RAD          150m
+FW_LND_FL_PMIN          -5deg
+LND_FW_VEL_Z_MAX        8m/s^2
+RWTO_MAX_ROLL           5deg
+RWTO_NAV_ALT            80m
+COM_TAKEOFF_ACT         Mission(if valid)
+MIS_DIST_1WP            10000m
+MIS_DIST_WPS            10000m
+
+FW_PR_I                 0.1%/rad
+FW_PR_P                 0.5%/rad/s
+FW_P_TC                 0.2s
+FW_RR_I                 0.1%/rad
+FW_RR_p                 0.8%/rad/s
+FW_R_TC                 0.4s
+FW_YR_I                 0.1%/rad
+FW_YR_P                 0.3%/rad/s
+
+
+
